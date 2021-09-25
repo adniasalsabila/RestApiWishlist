@@ -51,27 +51,27 @@
     function insert_wishlist()
       {
          global $connect;   
-         $check = array('id' => '', 'title' => '', 'cost' => '');
+         $check = array('id' => '', 'nameItem' => '', 'cost' => '');
          $check_match = count(array_intersect_key($_POST, $check));
          if($check_match == count($check)){
          
                $result = mysqli_query($connect, "INSERT INTO item_list SET
                id = '$_POST[id]',
-               title = '$_POST[title]',
+               nameItem = '$_POST[nameItem]',
                cost = '$_POST[cost]'");
                
                if($result)
                {
                   $response=array(
                      'status' => 1,
-                     'message' =>'Insert Success'
+                     'message' =>'Success'
                   );
                }
                else
                {
                   $response=array(
                      'status' => 0,
-                     'message' =>'Insert Failed.'
+                     'message' =>'Failed.'
                   );
                }
          }else{
@@ -90,26 +90,26 @@
          if (!empty($_GET["id"])) {
          $id = $_GET["id"];      
       }   
-         $check = array('title' => '', 'cost' => '');
+         $check = array('nameItem' => '', 'cost' => '');
          $check_match = count(array_intersect_key($_POST, $check));         
          if($check_match == count($check)){
          
               $result = mysqli_query($connect, "UPDATE item_list SET               
-               title = '$_POST[title]',
+               nameItem = '$_POST[nameItem]',
                cost = '$_POST[cost]' WHERE id = $id");
          
             if($result)
             {
                $response=array(
                   'status' => 1,
-                  'message' =>'Update Success'                  
+                  'message' =>'Success'                  
                );
             }
             else
             {
                $response=array(
                   'status' => 0,
-                  'message' =>'Update Failed'                  
+                  'message' =>'=Failed'                  
                );
             }
          }else{
@@ -132,14 +132,14 @@
          {
             $response=array(
                'status' => 1,
-               'message' =>'Delete Success'
+               'message' =>'Success'
             );
          }
          else
          {
             $response=array(
                'status' => 0,
-               'message' =>'Delete Fail.'
+               'message' =>'Fail.'
             );
          }
          header('Content-Type: application/json');
