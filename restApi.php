@@ -327,4 +327,26 @@
          echo json_encode($response);
       }
 
+      $gambar = $_FILES['file']['gambar'];
+      $namaGambar = $_FILES['file']['name'];
+ 
+      $file_path = $_SERVER['DOCUMENT_ROOT'] . '/api-kompikaleng';
+ 
+      $data = "";
+ 
+      if (!file_exists($file_path)) {
+         mkdir($file_path, 0777, true);
+      }
+ 
+      if(!$gambar){
+        $data['message'] = "Gambar tidak ditemukan";
+      }
+      else{
+         if(move_uploaded_file($gambar, $file_path.'/'.$namaGambar)){
+         $data['message'] = "Sukses Upload Gambar";
+      }
+   }
+      print_r(json_encode($data));
+ 
+
 ?>
